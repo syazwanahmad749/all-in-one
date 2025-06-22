@@ -593,7 +593,9 @@
         editorButtonsContainer.style.display = 'none'; // Initially hidden
         const saveChangesBtn = createModalButton('Save Changes', ['info-action'], ()=>{/* Placeholder */}, 'save');
         const saveAsNewBtn = createModalButton('Save as New', ['info-action'], ()=>{/* Placeholder */}, 'add_circle');
-        editorButtonsContainer.append(saveChangesBtn, saveAsNewBtn);
+        // Forcing individual appendChild calls here to test
+        editorButtonsContainer.appendChild(saveChangesBtn);
+        editorButtonsContainer.appendChild(saveAsNewBtn);
 
         const toggleEditorBtn = createModalButton('', ['icon-only', 'vfx-preamble-action-btn-aio'], ()=>{
             const isVisible = preambleEditor.style.display === 'block';
@@ -626,7 +628,9 @@
 
         const footerLeftContainer = document.createElement('div');
         footerLeftContainer.style.display = 'flex'; footerLeftContainer.style.gap = '10px';
-        footerLeftContainer.append(clearBtn, savePresetBtn, loadPresetBtn);
+        footerLeftContainer.appendChild(clearBtn);
+        footerLeftContainer.appendChild(savePresetBtn);
+        footerLeftContainer.appendChild(loadPresetBtn);
 
         const footerRightContainer = document.createElement('div');
         footerRightContainer.appendChild(generateBtn);
@@ -822,8 +826,10 @@
             textarea.className = 'vfx-tool-textarea'; textarea.readOnly = true; textarea.placeholder = 'Awaiting deconstruction...';
             const copyBtn = createModalButton('Copy', ['secondary-action', 'small-text-button'], null, 'content_copy');
             copyBtn.onclick = () => deconHandleCopyClick(textarea, copyBtn);
-            header.append(label, copyBtn);
-            container.append(header, textarea);
+            header.appendChild(label);
+            header.appendChild(copyBtn);
+            container.appendChild(header);
+            container.appendChild(textarea);
             contentWrapper.appendChild(container);
             deconResultTextareas[key] = { textarea, copyButton: copyBtn };
         });
@@ -939,7 +945,8 @@
 
         i2pCopyButton = createModalButton('Copy', ['secondary-action'], i2pHandleCopyClick, 'content_copy');
         i2pGenerateApiButton = createModalButton('Generate Prompt', ['primary-action'], i2pCallApi, 'auto_awesome');
-        footer.append(i2pCopyButton, i2pGenerateApiButton);
+        footer.appendChild(i2pCopyButton);
+        footer.appendChild(i2pGenerateApiButton);
 
         i2pClearSelectedImage();
         openModalUI(modal, backdrop);
